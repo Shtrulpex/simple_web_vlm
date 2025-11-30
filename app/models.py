@@ -1,4 +1,3 @@
-# app/models.py
 import os
 import torch
 from transformers import (
@@ -15,7 +14,6 @@ else:
     print(device)
 
 VQA_MODEL_ID = os.getenv("VQA_MODEL_ID", "HuggingFaceTB/SmolVLM-256M-Instruct")
-OCR_MODEL_ID = os.getenv("OCR_MODEL_ID", "microsoft/trocr-base-printed")
 
 # Загрузка SmolVLM2
 vqa_processor = AutoProcessor.from_pretrained(VQA_MODEL_ID)

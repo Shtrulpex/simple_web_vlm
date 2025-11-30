@@ -1,4 +1,3 @@
-# app/main.py
 import io
 import uuid
 from typing import Dict
@@ -125,7 +124,7 @@ async def ocr_download(ocr_id: str):
 
     text = OCR_RESULTS[ocr_id]
     filename = f"ocr_{ocr_id}.txt"
-    path = f"./tmp/{filename}"
+    path = f"/tmp/{filename}"
     with open(path, "w") as f:
         f.write(text)
 
