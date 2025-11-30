@@ -1,0 +1,46 @@
+<!-- app/static/index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Multimodal Demo</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/main.js" defer></script>
+</head>
+<body>
+<h1>Мультимодальная демо-модель</h1>
+
+<section id="vqa-section">
+    <h2>1. Image captioning + VQA</h2>
+    <form id="vqa-init-form">
+        <input type="file" id="vqa-image" name="image" accept="image/*" required>
+        <button type="submit">Загрузить изображение</button>
+    </form>
+    <p id="vqa-caption"></p>
+
+    <form id="vqa-ask-form" style="display:none;">
+        <input type="text" id="vqa-question" name="question" placeholder="Ваш вопрос по изображению" required>
+        <button type="submit">Спросить</button>
+    </form>
+    <p id="vqa-answer"></p>
+</section>
+
+<hr>
+
+<section id="ocr-section">
+    <h2>2. OCR</h2>
+    <form id="ocr-form">
+        <input type="file" id="ocr-image" name="image" accept="image/*" required>
+        <label>Макс. длина текста:
+            <input type="number" id="ocr-max-length" name="max_length" value="256" min="1" max="2048">
+        </label>
+        <button type="submit">Распознать текст</button>
+    </form>
+    <pre id="ocr-text"></pre>
+    <a id="ocr-download-link" href="#" style="display:none;">Скачать .txt</a>
+</section>
+
+<div id="error" style="color:red;"></div>
+
+</body>
+</html>
