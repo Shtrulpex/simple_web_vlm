@@ -4,12 +4,12 @@ import uuid
 from typing import Dict
 
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
-from fastapi.responses import FileResponse, JSONResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from PIL import Image
 import torch
 
-from .models import vqa_model, vqa_processor, ocr_model, ocr_processor, device
+from .models import vqa_model, vqa_processor, device
 
 app = FastAPI()
 
@@ -108,11 +108,6 @@ async def ocr(
     with torch.no_grad():
         output_ids = vqa_model.generate(**inputs, max_new_tokens=128)
     text = vqa_processor.batch_decode(output_ids, skip_special_tokens=True)[0][(len(prompt) - len('<image>')):]
-
-    # pixel_values = ocr_processor(images=image_pil, return_tensors="pt").pixel_values.to(device)
-    # with torch.no_grad():
-    #    generated_ids = ocr_model.generate(pixel_values, max_length=max_length)
-    # text = ocr_processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
 
     ocr_id = str(uuid.uuid4())
     OCR_RESULTS[ocr_id] = text
