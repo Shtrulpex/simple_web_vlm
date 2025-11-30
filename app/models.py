@@ -3,12 +3,10 @@ import os
 import torch
 from transformers import (
     AutoProcessor,
-    AutoModelForVision2Seq,
-    TrOCRProcessor,
-    VisionEncoderDecoderModel,
+    AutoModelForVision2Seq
 )
 
-DEVICE_ENV = os.getenv("DEVICE", "cpu")  # "cpu" или "gpu"
+DEVICE_ENV = os.getenv("DEVICE", "cpu")
 if DEVICE_ENV == "gpu" and torch.cuda.is_available():
     device = torch.device("cuda")
     print(device)
@@ -24,9 +22,3 @@ vqa_processor = AutoProcessor.from_pretrained(VQA_MODEL_ID)
 vqa_model = AutoModelForVision2Seq.from_pretrained(VQA_MODEL_ID)
 vqa_model.to(device)
 vqa_model.eval()
-
-# Загрузка TrOCR
-ocr_processor = TrOCRProcessor.from_pretrained(OCR_MODEL_ID)
-ocr_model = VisionEncoderDecoderModel.from_pretrained(OCR_MODEL_ID)
-ocr_model.to(device)
-ocr_model.eval()
